@@ -1,0 +1,7 @@
+.nav-tabs li a:hover {
+  background-color: rgba(61, 207, 243, 0.507);
+}
+
+.dropdown-menu a:hover {
+  background-color: darkgray;
+}
