@@ -30,7 +30,7 @@ const SideNavbar = () => {
     <Router>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-auto col-md-2 min-vh-100 d-flex justify-content-between flex-column">
+          <div className="position-fixed col-auto col-md-2 min-vh-100 d-flex justify-content-between flex-column">
             <div className="pt-3">
               <Link
                 to="/"
@@ -102,6 +102,7 @@ const SideNavbar = () => {
               </div>
             </div>
           </div>
+          <div className="col-md-2"></div>
           <div className="col">
             <Routes>
               <Route exact path="/" element={<Home />} />

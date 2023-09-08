@@ -24,6 +24,45 @@ function EditResume(props) {
     }
   };
 
+  const [inputSkills, setInputSkills] = useState("");
+  const [skills, setSkills] = useState([...updatedValues.TechnicalSkills]);
+
+  const skillsSubmit = (e) => {
+    e.preventDefault();
+    if (inputSkills.trim() !== "") {
+      // Add the new sentence to the list of sentences
+      setSkills([...skills, inputSkills]);
+      // Clear the input field
+      setInputSkills("");
+    }
+  };
+
+  const [inputCerts, setInputCerts] = useState("");
+  const [certs, setCerts] = useState([...updatedValues.Certifications]);
+
+  const CertsSubmit = (e) => {
+    e.preventDefault();
+    if (inputCerts.trim() !== "") {
+      // Add the new sentence to the list of sentences
+      setCerts([...certs, inputCerts]);
+      // Clear the input field
+      setInputCerts("");
+    }
+  };
+
+  const [inputAchivement, setInputAchivement] = useState("");
+  const [achivement, setAchivement] = useState([...updatedValues.Achievements]);
+
+  const AchivementSubmit = (e) => {
+    e.preventDefault();
+    if (inputCerts.trim() !== "") {
+      // Add the new sentence to the list of sentences
+      setAchivement([...achivement, inputAchivement]);
+      // Clear the input field
+      setInputAchivement("");
+    }
+  };
+
   const updateFields = (newValues) => {
     // Create a copy of the constants dictionary
     const updatedConstants = { ...resume };
@@ -193,7 +232,6 @@ function EditResume(props) {
                 );
               })}
             </Row>
-
             <Form.Group as={Row} className="mt-2">
               <Col>
                 <Form.Control
@@ -210,6 +248,50 @@ function EditResume(props) {
               </Col>
             </Form.Group>
 
+            <Row>
+              <h4
+                className="mt-4 mb-4 text-decoration-underline"
+                style={{ textAlign: "center" }}
+              >
+                Technical Skills
+              </h4>
+              <div
+                style={{ display: "flex", flexWrap: "wrap", marginTop: "2vh" }}
+              >
+                {skills.map((itemSkill, index) => {
+                  return (
+                    <div
+                      key={index}
+                      style={{
+                        marginLeft: "2px",
+                        backgroundColor: "grey",
+                        textAlign: "center",
+                        borderRadius: "5vh",
+                        display: "inline-block",
+                        margin: "5px",
+                      }}
+                    >
+                      <p className="h6 m-2">{itemSkill}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </Row>
+            <Form.Group as={Row} className="mt-4">
+              <Col>
+                <Form.Control
+                  type="text"
+                  value={inputSkills}
+                  onChange={(e) => setInputSkills(e.target.value)}
+                  placeholder="Click on Add button to add the skills."
+                />
+              </Col>
+              <Col style={{ maxWidth: "10vh" }}>
+                <Button type="submit" onClick={skillsSubmit}>
+                  Add
+                </Button>
+              </Col>
+            </Form.Group>
             <Row
               style={{
                 textAlign: "center",
@@ -233,6 +315,63 @@ function EditResume(props) {
                 />
               </Col>
             </Form.Group>
+            <Row>
+              <h4 className="mt-4 text-decoration-underline">Certifications</h4>
+              {certs.map((itemCerts, index) => {
+                return (
+                  <span key={index}>
+                    {index + 1 + " - " + itemCerts}
+                    <br />
+                  </span>
+                );
+              })}
+            </Row>
+            <Form.Group as={Row} className="mt-4">
+              <Col>
+                <Form.Control
+                  type="text"
+                  value={inputCerts}
+                  onChange={(e) => setInputCerts(e.target.value)}
+                  placeholder="Click on Add button to add the Certificates."
+                />
+              </Col>
+              <Col style={{ maxWidth: "10vh" }}>
+                <Button type="submit" onClick={CertsSubmit}>
+                  Add
+                </Button>
+              </Col>
+            </Form.Group>
+            <Row>
+              <h4 className="mt-4 text-decoration-underline">Achievements</h4>
+              {achivement.map((itemAchivement, index) => {
+                return (
+                  <span key={index}>
+                    {index + 1 + " - " + itemAchivement}
+                    <br />
+                  </span>
+                );
+              })}
+            </Row>
+            <Form.Group as={Row} className="mt-4">
+              <Col>
+                <Form.Control
+                  type="text"
+                  value={inputAchivement}
+                  onChange={(e) => setInputAchivement(e.target.value)}
+                  placeholder="Click on Add button to add the Achivements."
+                />
+              </Col>
+              <Col style={{ maxWidth: "10vh" }}>
+                <Button type="submit" onClick={AchivementSubmit}>
+                  Add
+                </Button>
+              </Col>
+            </Form.Group>
+
+            <Form.Group className="mt-3" as={Row}>
+
+            </Form.Group>
+
             {/* Update resume Button */}
             <Form.Group className="mt-3" as={Row}>
               <Col></Col>
