@@ -63,6 +63,86 @@ function EditResume(props) {
     }
   };
 
+  const workExp = () => {
+    return (
+      <Form.Group as={Col} className="mt-3">
+        <Row>
+          <Form.Label column sm="2">
+            Company Name
+          </Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Company Name"
+            style={{ maxWidth: "60vh" }}
+          />
+        </Row>
+        <Row className="mt-3">
+          <Form.Label column sm="2">
+            Position
+          </Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Position"
+            style={{ maxWidth: "60vh" }}
+          />
+        </Row>
+        <Row className="mt-3">
+          <Form.Label column sm="2">
+            Start Date
+          </Form.Label>
+          <Form.Control
+            type="date"
+            placeholder="Start Date"
+            style={{ maxWidth: "60vh" }}
+          />
+        </Row>
+        <Row className="mt-3">
+          <Form.Label column sm="2">
+            End Date
+          </Form.Label>
+          <Form.Control
+            type="date"
+            placeholder="End Date"
+            style={{ maxWidth: "60vh" }}
+          />
+        </Row>
+        <Row className="mt-3">
+          <Col style={{ maxWidth: "22vh" }}>
+            <Form.Label className="mt-4">Responsibilities</Form.Label>
+          </Col>
+          <Col>
+            <Form.Control
+              className="mt-3"
+              as="textarea"
+              rows={3}
+              placeholder="Write all the responsibilities with seperater as '|'."
+            />
+            <small>
+              <strong>Note: </strong>Write all the responsibilities with
+              seperater as '|'.
+            </small>
+          </Col>
+        </Row>
+        <Row className="mt-3">
+          <Col style={{ maxWidth: "22vh" }}>
+            <Form.Label className="mt-4">Skills/Technologies</Form.Label>
+          </Col>
+          <Col>
+            <Form.Control
+              className="mt-3"
+              as="textarea"
+              rows={2}
+              placeholder="Write all the Skills with seperater as '|'."
+            />
+            <small>
+              <strong>Note: </strong>Write all the Skills with seperater as '|'.
+            </small>
+          </Col>
+        </Row>
+      </Form.Group>
+    );
+  };
+
   const updateFields = (newValues) => {
     // Create a copy of the constants dictionary
     const updatedConstants = { ...resume };
@@ -368,12 +448,15 @@ function EditResume(props) {
               </Col>
             </Form.Group>
 
-            <Form.Group className="mt-3" as={Row}>
-
-            </Form.Group>
+            <Row>
+              <h4 className="mt-4 text-decoration-underline">
+                Work Experience
+              </h4>
+            </Row>
+            {workExp()}
 
             {/* Update resume Button */}
-            <Form.Group className="mt-3" as={Row}>
+            <Form.Group className="m-4" as={Row}>
               <Col></Col>
               <Col></Col>
               <Col>
