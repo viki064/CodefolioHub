@@ -1,12 +1,15 @@
-from flask import Flask, jsonify, request, redirect
 import data_handler
 import data_json
 from flask_cors import CORS
 import chatbot
-# from cryptography.fernet import Fernet
+# Import necessary libraries
+from flask import Flask, request, redirect, session, url_for, jsonify
 
+
+# Create a Flask app
 app = Flask(__name__)
 CORS(app)
+
 
 # encryption_key = b'C0d3f0l!0H0b'
 
@@ -67,14 +70,6 @@ def chat_by_id(key):
     body = request.json['user']
     return jsonify(chatbot.recursive(a=body, key=key))
 
-
-# def decrypt_key_from_frontend(key):
-#     # Initialize the Fernet encryption object with the encryption key
-#     fernet = Fernet(encryption_key)
-#     # Decrypt the text
-#     email = fernet.decrypt(key.encode()).decode()
-#
-#     return email
 
 
 if __name__ == "__main__":
