@@ -1,22 +1,29 @@
 import "./App.css";
-// import Home from "./components/Home/home";
+import { React } from "react";
+import Home from "./components/Home/home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import Page from "./portfolios/page";
-import SideNavbar from "./MainDashboard/SideNavbar";
+import SideNavbar from "./components/MainDashboard/SideNavbar";
 
 function App() {
   // return <Home />;
   // data-bs-theme="dark"
+  // {...(isDisabled ? { disabled: true } : {})}
   return (
-    <div
-      className="App"
-      style={{ backgroundColor: "#212529", color: "white" }}
-      data-bs-theme="dark"
-    >
-      <header className="App-header">
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/dashboard/*" element={<SideNavbar />} />
+            <Route path="*" element={<Home />} />
+          </Route>
+        </Routes>
         {/* <Page /> */}
-        <SideNavbar />
-      </header>
-    </div>
+        {/* <SideNavbar /> */}
+        {/* <Home /> */}
+      </div>
+    </BrowserRouter>
   );
 }
 

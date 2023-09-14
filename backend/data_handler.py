@@ -25,6 +25,7 @@ def write_json(json_data):
 
 # the below method will return all the values of the available data
 data = json_data["resume_data"]
+user_data = json_data["Authentication"]
 
 
 # check that the given ID is valid or not
@@ -53,8 +54,6 @@ def read_json_with_id(key=None):
 def write_new_record_to_json(body):
     key = body["Email"]
     body["lastUpdated"] = date
-    for i in range(len(body["WorkExperience"])):
-        body["WorkExperience"][i]["id"] = i + 1
     data[key] = body
     # print(data)
     # print(json_data)
@@ -94,6 +93,28 @@ def update_new_record_to_json(body, key=None):
     else:
         data_json.error["error"] = "ID is not available to update the record"
         return data_json.error
+
+
+# add used into json file
+def add_users(body):
+    body = json.loads(body)
+    user_data["Users"][body["email"]] = body
+    write_json(json_data=json_data)
+    return body
+
+
+# get users
+def read_users(key=None):
+    if len(user_data) != 0:
+        if key is not None:
+            return user_data[key]
+        else:
+            data_json.error["error"] = "Data is not available for the given key."
+            return data_json.error
+    else:
+        return {
+            "message": "No Data Available"
+        }
 
 
 sample_data = {

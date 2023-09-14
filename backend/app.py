@@ -2,9 +2,7 @@ import data_handler
 import data_json
 from flask_cors import CORS
 import chatbot
-# Import necessary libraries
-from flask import Flask, request, redirect, session, url_for, jsonify
-
+from flask import Flask, request, redirect, jsonify
 
 # Create a Flask app
 app = Flask(__name__)
@@ -69,7 +67,6 @@ def delete_details_1():
 def chat_by_id(key):
     body = request.json['user']
     return jsonify(chatbot.recursive(a=body, key=key))
-
 
 
 if __name__ == "__main__":

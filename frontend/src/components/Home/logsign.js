@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedinIn, faGoogle } from "@fortawesome/free-brands-svg-icons";
+// import GoogleLogin from "../Login/GoogleLogin";
 // import APIService from "../../APIService";
 
 function LoginSignup(props) {
@@ -20,15 +21,10 @@ function LoginSignup(props) {
         </Modal.Header>
         <Modal.Body className="mx-auto">
           <div className="d-grid gap-2">
-            <Button variant="primary" size="lg">
+            <Button variant="transparant" size="lg">
               <FontAwesomeIcon icon={faGoogle} />
               {"  "}
-              <a
-                href="http://127.0.0.1:5000/login"
-                className="text-decoration-none text-white"
-              >
-                Login with Google
-              </a>
+              Login with Google
             </Button>
             <Button variant="secondary" size="lg">
               <FontAwesomeIcon icon={faLinkedinIn} />
@@ -37,9 +33,9 @@ function LoginSignup(props) {
             </Button>
           </div>
         </Modal.Body>
-        <Modal.Footer className="mx-auto">
+        {/* <Modal.Footer className="mx-auto">
           <Button variant="outline-secondary">Login with Email</Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
     </>
   );

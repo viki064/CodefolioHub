@@ -1,9 +1,13 @@
 import { React, useState } from "react";
 import { Container, Row, Form, Col, Button } from "react-bootstrap";
+import DeleteIcon from "@mui/icons-material/Delete";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 // import FormExample from "../A_FormExample";
 
 function EditResume(props) {
   const [resume, setResume] = useState(props.resume ? { ...props.resume } : {});
+  const [show, setShow] = useState(false);
+  const dark = props.dark;
 
   const [updatedValues, setUpdatedValues] = useState(
     resume ? { ...resume } : {}
@@ -26,6 +30,7 @@ function EditResume(props) {
 
   const [inputSkills, setInputSkills] = useState("");
   const [skills, setSkills] = useState([...updatedValues.TechnicalSkills]);
+  // console.log(skills);
 
   const skillsSubmit = (e) => {
     e.preventDefault();
@@ -63,7 +68,25 @@ function EditResume(props) {
     }
   };
 
-  const workExp = () => {
+  const [workTemplate, setWorkTemplate] = useState({
+    CompanyName: "",
+    Position: "",
+    ProjectName: "",
+    StartDate: "",
+    EndDate: "",
+    Responsibilities: "",
+    Technologies: "",
+  });
+
+  const [work, setWork] = useState([...updatedValues.WorkExperience]);
+
+  const workSubmit = (e) => {
+    e.preventDefault();
+    // Add the new sentence to the list of sentences
+    setWork([...work, workTemplate]);
+  };
+
+  const workDispExp = (item) => {
     return (
       <Form.Group as={Col} className="mt-3">
         <Row>
@@ -72,7 +95,8 @@ function EditResume(props) {
           </Form.Label>
           <Form.Control
             type="text"
-            placeholder="Company Name"
+            value={item.CompanyName}
+            readOnly
             style={{ maxWidth: "60vh" }}
           />
         </Row>
@@ -82,27 +106,19 @@ function EditResume(props) {
           </Form.Label>
           <Form.Control
             type="text"
-            placeholder="Position"
+            value={item.Position}
+            readOnly
             style={{ maxWidth: "60vh" }}
           />
         </Row>
         <Row className="mt-3">
           <Form.Label column sm="2">
-            Start Date
+            Duration
           </Form.Label>
           <Form.Control
-            type="date"
-            placeholder="Start Date"
-            style={{ maxWidth: "60vh" }}
-          />
-        </Row>
-        <Row className="mt-3">
-          <Form.Label column sm="2">
-            End Date
-          </Form.Label>
-          <Form.Control
-            type="date"
-            placeholder="End Date"
+            type="text"
+            value={item.StartDate + " - " + item.EndDate}
+            readOnly
             style={{ maxWidth: "60vh" }}
           />
         </Row>
@@ -114,13 +130,14 @@ function EditResume(props) {
             <Form.Control
               className="mt-3"
               as="textarea"
-              rows={3}
-              placeholder="Write all the responsibilities with seperater as '|'."
+              value={item.Responsibilities}
+              readOnly="false"
+              rows={5}
             />
-            <small>
+            {/* <small>
               <strong>Note: </strong>Write all the responsibilities with
               seperater as '|'.
-            </small>
+            </small> */}
           </Col>
         </Row>
         <Row className="mt-3">
@@ -131,12 +148,14 @@ function EditResume(props) {
             <Form.Control
               className="mt-3"
               as="textarea"
+              value={item.Technologies}
+              readOnly
               rows={2}
               placeholder="Write all the Skills with seperater as '|'."
             />
-            <small>
+            {/* <small>
               <strong>Note: </strong>Write all the Skills with seperater as '|'.
-            </small>
+            </small> */}
           </Col>
         </Row>
       </Form.Group>
@@ -344,14 +363,32 @@ function EditResume(props) {
                       key={index}
                       style={{
                         marginLeft: "2px",
-                        backgroundColor: "grey",
+                        backgroundColor: "black",
+                        color: "white",
                         textAlign: "center",
                         borderRadius: "5vh",
                         display: "inline-block",
                         margin: "5px",
                       }}
                     >
-                      <p className="h6 m-2">{itemSkill}</p>
+                      <p className="h6 m-1 ms-3">
+                        {itemSkill}{" "}
+                        <button
+                          type="button"
+                          style={{
+                            border: "none",
+                            backgroundColor: "transparent",
+                          }}
+                          onClick={() =>
+                            setSkills([
+                              ...skills.slice(0, index),
+                              ...skills.slice(index + 1),
+                            ])
+                          }
+                        >
+                          <DeleteIcon style={{ color: "white" }} />
+                        </button>
+                      </p>
                     </div>
                   );
                 })}
@@ -451,9 +488,39 @@ function EditResume(props) {
             <Row>
               <h4 className="mt-4 text-decoration-underline">
                 Work Experience
+                <Button type="button" className="ms-4 me-2" onClick={() => {}}>
+                  Add Experience <BorderColorIcon />
+                </Button>
               </h4>
             </Row>
-            {workExp()}
+            {work.map((workitem, index) => {
+              return (
+                <div className="p-2 mb-2 border">
+                  <h4 className="text-decoration-underline">
+                    {"Experience: " + (index + 1)}
+                  </h4>
+
+                  {workDispExp(workitem)}
+                  <div className="mb-3 ms-2">
+                    <Button type="button" className="me-2" onClick={() => {}}>
+                      Edit <BorderColorIcon />
+                    </Button>
+                    <Button
+                      type="button"
+                      className="ms-2 bg-danger border border-danger"
+                      onClick={() =>
+                        setSkills([
+                          ...work.slice(0, index),
+                          ...work.slice(index + 1),
+                        ])
+                      }
+                    >
+                      Delete <DeleteIcon />
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
 
             {/* Update resume Button */}
             <Form.Group className="m-4" as={Row}>

@@ -5,3 +5,11 @@
 .dropdown-menu a:hover {
   background-color: darkgray;
 }
+
+.darkmode {
+  color: white;
+}
+
+.lightmode {
+  color: black;
+}

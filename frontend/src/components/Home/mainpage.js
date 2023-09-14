@@ -31,12 +31,10 @@ function Mainpage() {
                     <hr />
                     <p>Make your portfolio publicly active.</p>
                     <hr />
-                    <div>
-                      <p>
-                        <mark className="h6 bg-info">Update: </mark>
-                        Create custom portfolios using drag and drop component.
-                      </p>
-                    </div>
+                    <p>
+                      <mark className="h6 bg-info">Update: </mark>
+                      Create custom portfolios using drag and drop component.
+                    </p>
                   </Card.Text>
                 </Card.Body>
               </Card>

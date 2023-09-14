@@ -113,7 +113,7 @@ resume_format = {
 import secrets
 
 # Generate a random 32-byte (256-bit) secret key
-hex_string = b'C0d3f0l!0H0b'
+# hex_string = b'C0d3f0l!0H0b'
 # Convert the secret_key to a hexadecimal string
 # hex_key = secret_key.hex()
 #
