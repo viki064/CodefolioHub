@@ -91,19 +91,21 @@ resume_format = {
     "Education": "",
     "Certifications": "",
     "Achievements": "",
-    "WorkExperience": [
-        {
-            "CompanyName": "",
-            "Position": "",
-            "ProjectName": "",
-            "StartDate": "",
-            "EndDate": "",
-            "Responsibilities": ""
-        }
-    ],
+    "WorkExperience": [],
     "lastUpdated": ""
 }
 #
+
+# "WorkExperience": [
+#         {
+#             "CompanyName": "",
+#             "Position": "",
+#             "ProjectName": "",
+#             "StartDate": "",
+#             "EndDate": "",
+#             "Responsibilities": ""
+#         }
+#     ]
 
 # import secrets
 #

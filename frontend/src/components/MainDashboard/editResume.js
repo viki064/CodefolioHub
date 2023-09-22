@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { RESUME_TEMPLATE } from "../../staticComponents/constant";
 // import FormExample from "../A_FormExample";
 
 function formatDateString(inputDateString) {
@@ -66,17 +67,21 @@ function formatDateForInput(inputDateString) {
 }
 
 function EditResume(props) {
-  const [resume, setResume] = useState(props.resume ? { ...props.resume } : {});
+  const [resume, setResume] = useState(
+    props.resume ? { ...props.resume } : RESUME_TEMPLATE
+  );
   const [show, setShow] = useState(false);
 
   const [updatedValues, setUpdatedValues] = useState(
-    resume ? { ...resume } : {}
+    resume ? { ...resume } : RESUME_TEMPLATE
   );
 
   const [inputSummary, setInputSummary] = useState("");
-  const [summary, setSummary] = useState([
-    ...updatedValues.ProfessionalSummary,
-  ]);
+  const [summary, setSummary] = useState(
+    updatedValues.ProfessionalSummary
+      ? [...updatedValues.ProfessionalSummary]
+      : ""
+  );
 
   const summarySubmit = (e) => {
     e.preventDefault();
@@ -89,7 +94,12 @@ function EditResume(props) {
   };
 
   const [inputSkills, setInputSkills] = useState("");
-  const [skills, setSkills] = useState([...updatedValues.TechnicalSkills]);
+  const [skills, setSkills] = useState(
+    Array.isArray(updatedValues.TechnicalSkills)
+      ? [...updatedValues.TechnicalSkills]
+      : []
+  );
+
   // console.log(skills);
 
   const skillsSubmit = (e) => {
@@ -103,7 +113,11 @@ function EditResume(props) {
   };
 
   const [inputCerts, setInputCerts] = useState("");
-  const [certs, setCerts] = useState([...updatedValues.Certifications]);
+  const [certs, setCerts] = useState(
+    Array.isArray(updatedValues.Certifications)
+      ? [...updatedValues.Certifications]
+      : []
+  );
 
   const CertsSubmit = (e) => {
     e.preventDefault();
@@ -116,7 +130,11 @@ function EditResume(props) {
   };
 
   const [inputAchivement, setInputAchivement] = useState("");
-  const [achivement, setAchivement] = useState([...updatedValues.Achievements]);
+  const [achivement, setAchivement] = useState(
+    Array.isArray(updatedValues.Achievements)
+      ? [...updatedValues.Achievements]
+      : []
+  );
 
   const AchivementSubmit = (e) => {
     e.preventDefault();
@@ -139,15 +157,35 @@ function EditResume(props) {
   });
 
   const [workItemIndex, setWorkItemIndex] = useState(0);
-  const [work, setWork] = useState([...updatedValues.WorkExperience]);
+  const [work, setWork] = useState(
+    Array.isArray(updatedValues.WorkExperience)
+      ? [...updatedValues.WorkExperience]
+      : []
+  );
 
   const updateWork = () => {
     const updatedWork = [...work];
-    if (workItemIndex >= 0 && workItemIndex < updatedWork.length) {
-      updatedWork[workItemIndex] = workTemplate;
+    console.log(workItemIndex);
+    if (work) {
+      updatedWork.push(workTemplate);
       setWork(updatedWork);
-      setShow(false);
+      setWorkTemplate({
+        CompanyName: "",
+        Position: "",
+        ProjectName: "",
+        StartDate: "",
+        EndDate: "",
+        Responsibilities: "",
+        Technologies: "",
+      });
+      // console.log(work);
+    } else {
+      if (workItemIndex >= 0 && workItemIndex < updatedWork.length) {
+        updatedWork[workItemIndex] = workTemplate;
+        setWork(updatedWork);
+      }
     }
+    setShow(false);
   };
 
   const workDispExp = (item) => {
@@ -237,6 +275,8 @@ function EditResume(props) {
 
     // Set the state with the updated dictionary
     setResume(updatedConstants);
+    // console.log(updatedConstants);
+    // console.log(resume);
   };
 
   const handleSubmit = (e) => {
@@ -393,39 +433,43 @@ function EditResume(props) {
               <h4 className="mt-4 text-decoration-underline">
                 Professional Summary
               </h4>
-              {summary.map((itemSummary, index) => {
-                return (
-                  <Row>
-                    <Col>
-                      <span key={index}>
-                        {index + 1 + " - " + itemSummary}
-                        <br />
-                      </span>
-                    </Col>
-                    <Col style={{ maxWidth: "8vh" }}>
-                      <button
-                        type="button"
-                        style={{
-                          border: "none",
-                          backgroundColor: "transparent",
-                        }}
-                        onClick={() =>
-                          setSummary([
-                            ...summary.slice(0, index),
-                            ...summary.slice(index + 1),
-                          ])
-                        }
-                      >
-                        <DeleteIcon
-                          style={
-                            props.dark ? { color: "white" } : { color: "black" }
-                          }
-                        />
-                      </button>
-                    </Col>
-                  </Row>
-                );
-              })}
+              {summary
+                ? summary.map((itemSummary, index) => {
+                    return (
+                      <Row>
+                        <Col>
+                          <span key={index}>
+                            {index + 1 + " - " + itemSummary}
+                            <br />
+                          </span>
+                        </Col>
+                        <Col style={{ maxWidth: "8vh" }}>
+                          <button
+                            type="button"
+                            style={{
+                              border: "none",
+                              backgroundColor: "transparent",
+                            }}
+                            onClick={() =>
+                              setSummary([
+                                ...summary.slice(0, index),
+                                ...summary.slice(index + 1),
+                              ])
+                            }
+                          >
+                            <DeleteIcon
+                              style={
+                                props.dark
+                                  ? { color: "white" }
+                                  : { color: "black" }
+                              }
+                            />
+                          </button>
+                        </Col>
+                      </Row>
+                    );
+                  })
+                : ""}
             </Row>
             <Form.Group as={Row} className="mt-2">
               <Col>
@@ -453,41 +497,43 @@ function EditResume(props) {
               <div
                 style={{ display: "flex", flexWrap: "wrap", marginTop: "2vh" }}
               >
-                {skills.map((itemSkill, index) => {
-                  return (
-                    <div
-                      key={index}
-                      style={{
-                        marginLeft: "2px",
-                        backgroundColor: "black",
-                        color: "white",
-                        textAlign: "center",
-                        borderRadius: "5vh",
-                        display: "inline-block",
-                        margin: "5px",
-                      }}
-                    >
-                      <p className="h6 m-1 ms-3">
-                        {itemSkill}{" "}
-                        <button
-                          type="button"
+                {skills
+                  ? skills.map((itemSkill, index) => {
+                      return (
+                        <div
+                          key={index}
                           style={{
-                            border: "none",
-                            backgroundColor: "transparent",
+                            marginLeft: "2px",
+                            backgroundColor: "black",
+                            color: "white",
+                            textAlign: "center",
+                            borderRadius: "5vh",
+                            display: "inline-block",
+                            margin: "5px",
                           }}
-                          onClick={() =>
-                            setSkills([
-                              ...skills.slice(0, index),
-                              ...skills.slice(index + 1),
-                            ])
-                          }
                         >
-                          <DeleteIcon style={{ color: "white" }} />
-                        </button>
-                      </p>
-                    </div>
-                  );
-                })}
+                          <p className="h6 m-1 ms-3">
+                            {itemSkill}{" "}
+                            <button
+                              type="button"
+                              style={{
+                                border: "none",
+                                backgroundColor: "transparent",
+                              }}
+                              onClick={() =>
+                                setSkills([
+                                  ...skills.slice(0, index),
+                                  ...skills.slice(index + 1),
+                                ])
+                              }
+                            >
+                              <DeleteIcon style={{ color: "white" }} />
+                            </button>
+                          </p>
+                        </div>
+                      );
+                    })
+                  : ""}
               </div>
             </Row>
             <Form.Group as={Row} className="mt-4">
@@ -530,39 +576,43 @@ function EditResume(props) {
             </Form.Group>
             <Row>
               <h4 className="mt-4 text-decoration-underline">Certifications</h4>
-              {certs.map((itemCerts, index) => {
-                return (
-                  <Row>
-                    <Col>
-                      <span key={index}>
-                        {index + 1 + " - " + itemCerts}
-                        <br />
-                      </span>
-                    </Col>
-                    <Col style={{ maxWidth: "8vh" }}>
-                      <button
-                        type="button"
-                        style={{
-                          border: "none",
-                          backgroundColor: "transparent",
-                        }}
-                        onClick={() =>
-                          setCerts([
-                            ...certs.slice(0, index),
-                            ...certs.slice(index + 1),
-                          ])
-                        }
-                      >
-                        <DeleteIcon
-                          style={
-                            props.dark ? { color: "white" } : { color: "black" }
-                          }
-                        />
-                      </button>
-                    </Col>
-                  </Row>
-                );
-              })}
+              {certs
+                ? certs.map((itemCerts, index) => {
+                    return (
+                      <Row>
+                        <Col>
+                          <span key={index}>
+                            {index + 1 + " - " + itemCerts}
+                            <br />
+                          </span>
+                        </Col>
+                        <Col style={{ maxWidth: "8vh" }}>
+                          <button
+                            type="button"
+                            style={{
+                              border: "none",
+                              backgroundColor: "transparent",
+                            }}
+                            onClick={() =>
+                              setCerts([
+                                ...certs.slice(0, index),
+                                ...certs.slice(index + 1),
+                              ])
+                            }
+                          >
+                            <DeleteIcon
+                              style={
+                                props.dark
+                                  ? { color: "white" }
+                                  : { color: "black" }
+                              }
+                            />
+                          </button>
+                        </Col>
+                      </Row>
+                    );
+                  })
+                : ""}
             </Row>
             <Form.Group as={Row} className="mt-4">
               <Col>
@@ -581,39 +631,41 @@ function EditResume(props) {
             </Form.Group>
             <Row>
               <h4 className="mt-4 text-decoration-underline">Achievements</h4>
-              {achivement.map((itemAchivement, index) => {
-                return (
-                  <Row>
-                    <Col>
-                      <span key={index}>
-                        {index + 1 + " - " + itemAchivement}
-                        <br />
-                      </span>
-                    </Col>
-                    <Col style={{ maxWidth: "8vh" }}>
-                      <button
-                        type="button"
-                        style={{
-                          border: "none",
-                          backgroundColor: "transparent",
-                        }}
-                        onClick={() =>
-                          setAchivement([
-                            ...achivement.slice(0, index),
-                            ...achivement.slice(index + 1),
-                          ])
-                        }
-                      >
-                        <DeleteIcon
-                          style={
-                            props.dark ? { color: "white" } : { color: "black" }
+              {achivement
+                ? achivement.map((itemAchivement, index) => (
+                    <Row key={index}>
+                      <Col>
+                        <span>
+                          {index + 1 + " - " + itemAchivement}
+                          <br />
+                        </span>
+                      </Col>
+                      <Col style={{ maxWidth: "8vh" }}>
+                        <button
+                          type="button"
+                          style={{
+                            border: "none",
+                            backgroundColor: "transparent",
+                          }}
+                          onClick={() =>
+                            setAchivement([
+                              ...achivement.slice(0, index),
+                              ...achivement.slice(index + 1),
+                            ])
                           }
-                        />
-                      </button>
-                    </Col>
-                  </Row>
-                );
-              })}
+                        >
+                          <DeleteIcon
+                            style={
+                              props.dark
+                                ? { color: "white" }
+                                : { color: "black" }
+                            }
+                          />
+                        </button>
+                      </Col>
+                    </Row>
+                  ))
+                : ""}
             </Row>
             <Form.Group as={Row} className="mt-4">
               <Col>
@@ -621,7 +673,7 @@ function EditResume(props) {
                   type="text"
                   value={inputAchivement}
                   onChange={(e) => setInputAchivement(e.target.value)}
-                  placeholder="Click on Add button to add the Achivements."
+                  placeholder="Click on Add button to add the Acheivements."
                 />
               </Col>
               <Col style={{ maxWidth: "10vh" }}>
@@ -634,48 +686,56 @@ function EditResume(props) {
             <Row>
               <h4 className="mt-4 text-decoration-underline">
                 Work Experience
-                <Button type="button" className="ms-4 me-2" onClick={() => {}}>
+                <Button
+                  type="button"
+                  className="ms-4 me-2"
+                  onClick={() => {
+                    setShow(true);
+                  }}
+                >
                   Add Experience <BorderColorIcon />
                 </Button>
               </h4>
             </Row>
             <div>
-              {work.map((workitem, index) => {
-                return (
-                  <div key={index} className="p-2 mb-2 border">
-                    <h4 className="text-decoration-underline">
-                      {"Experience: " + (index + 1)}
-                    </h4>
+              {work
+                ? work.map((workitem, index) => {
+                    return (
+                      <div key={index} className="p-2 mb-2 border">
+                        <h4 className="text-decoration-underline">
+                          {"Experience: " + (index + 1)}
+                        </h4>
 
-                    {workDispExp(workitem)}
-                    <div className="mb-3 ms-2">
-                      <Button
-                        type="button"
-                        className="me-2"
-                        onClick={() => {
-                          setShow(true);
-                          setWorkTemplate(workitem);
-                          setWorkItemIndex(index);
-                        }}
-                      >
-                        Edit <BorderColorIcon />
-                      </Button>
-                      <Button
-                        type="button"
-                        className="ms-2 bg-danger border border-danger"
-                        onClick={() =>
-                          setWork([
-                            ...work.slice(0, index),
-                            ...work.slice(index + 1),
-                          ])
-                        }
-                      >
-                        Delete <DeleteIcon />
-                      </Button>
-                    </div>
-                  </div>
-                );
-              })}
+                        {workDispExp(workitem)}
+                        <div className="mb-3 ms-2">
+                          <Button
+                            type="button"
+                            className="me-2"
+                            onClick={() => {
+                              setShow(true);
+                              setWorkTemplate(workitem);
+                              setWorkItemIndex(index);
+                            }}
+                          >
+                            Edit <BorderColorIcon />
+                          </Button>
+                          <Button
+                            type="button"
+                            className="ms-2 bg-danger border border-danger"
+                            onClick={() =>
+                              setWork([
+                                ...work.slice(0, index),
+                                ...work.slice(index + 1),
+                              ])
+                            }
+                          >
+                            Delete <DeleteIcon />
+                          </Button>
+                        </div>
+                      </div>
+                    );
+                  })
+                : ""}
               <Modal
                 show={show}
                 onHide={() => setShow(false)}

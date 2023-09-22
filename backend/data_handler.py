@@ -97,7 +97,7 @@ def update_new_record_to_json(body, key=None):
 
 # add used into json file
 def add_users(body):
-    body = json.loads(body)
+    # body = json.loads(body)
     user_data["Users"][body["email"]] = body
     write_json(json_data=json_data)
     return body

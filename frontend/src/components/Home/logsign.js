@@ -1,11 +1,16 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedinIn, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
+import { LINKEDIN_LOGIN_URL } from "../../staticComponents/constant";
 // import GoogleLogin from "../Login/GoogleLogin";
 // import APIService from "../../APIService";
 
 function LoginSignup(props) {
+  const handleLinkedInLogin = () => {
+    window.location.href = LINKEDIN_LOGIN_URL;
+  };
+
   return (
     <>
       <Modal
@@ -21,12 +26,12 @@ function LoginSignup(props) {
         </Modal.Header>
         <Modal.Body className="mx-auto">
           <div className="d-grid gap-2">
-            <Button variant="transparant" size="lg">
+            {/* <Button variant="transparant" size="lg">
               <FontAwesomeIcon icon={faGoogle} />
               {"  "}
               Login with Google
-            </Button>
-            <Button variant="secondary" size="lg">
+            </Button> */}
+            <Button variant="secondary" size="lg" onClick={handleLinkedInLogin}>
               <FontAwesomeIcon icon={faLinkedinIn} />
               {"  "}
               Login with LinkedIn

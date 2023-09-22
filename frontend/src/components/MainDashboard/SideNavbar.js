@@ -3,14 +3,17 @@ import "bootstrap/js/dist/dropdown";
 import "./SideMenu.css";
 import logo from "../../staticComponents/logo.png";
 import { Link, Route, Routes } from "react-router-dom";
-import Home from "./home";
+// import Home from "./home";
 import EditResume from "./editResume";
 import Themes from "./themes";
 import APIService from "../../APIServices/APIService";
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
+import { LOGOUT_URL } from "../../staticComponents/constant";
+import UserProfile from "./userProfile";
 
 const SideNavbar = () => {
   const [resume, setResume] = useState("");
+  const [userDetails, setUserDetails] = useState("");
   const [dark, setDark] = useState(true);
   const email = "modiyam.vikram@gmail.com";
 
@@ -18,7 +21,22 @@ const SideNavbar = () => {
     setDark(!dark);
   };
 
+  //   email: "modiyam.vikram@gmail.com"
+  // email_verified: true
+  // family_name: "Modiyam"
+  // given_name: "Vikram"
+  // locale: {country: 'US', language: 'en'}
+  // name: "Vikram Modiyam"
+  // picture: "https://media.licdn.com/dms/image/D5603AQGwqXbkqNl9wg/profile-displayphoto-shrink_100_100/0/1694464742580?e=1700697600&v=beta&t=jiO-KSvyc-sp1hbRzPC9ky9eEycEGZ9N751jqnpVkQ0"
+  // sub: "rluDvU7muc"
+
   useEffect(() => {
+    APIService.loadUser()
+      .then((resp) => {
+        setUserDetails(resp);
+        // console.log(resp);
+      })
+      .catch((error) => console.log(error));
     APIService.loadResume(email)
       .then((resp) => {
         setResume(resp);
@@ -45,7 +63,7 @@ const SideNavbar = () => {
             <div className="pt-3">
               <Link
                 to="navbar/"
-                className="text-decoration-none d-none d-sm-inline d-flex align-itemcenter ms-3 mt-3"
+                className="text-decoration-none align-itemcenter ms-3 mt-3"
               >
                 <img
                   style={{ height: "8vh", width: "8vh" }}
@@ -53,14 +71,16 @@ const SideNavbar = () => {
                   alt="logo"
                 ></img>
                 <span
-                  className={`${dark ? "darkmode" : "lightmode"} ms-2 fs-4`}
+                  className={`${
+                    dark ? "darkmode" : "lightmode"
+                  } ms-2 d-none d-sm-inline fs-4`}
                 >
                   CodefolioHub
                 </span>
               </Link>
               <hr className="text-secondary d-none d-sm-block" />
               <ul className="nav nav-tabs flex-column mt-3 mt-sm-0">
-                <li className="nav-item fs-4 my-1 py-2 py-sm-0">
+                {/* <li className="nav-item fs-4 my-1 py-2 py-sm-0">
                   <Link
                     to="navbar/"
                     className="nav-link fs-5"
@@ -69,7 +89,7 @@ const SideNavbar = () => {
                     <i className="fs-4 bi bi-house"></i>
                     <span className="ms-2 d-none d-sm-inline">Home</span>
                   </Link>
-                </li>
+                </li> */}
                 <li className="nav-item fs-4 my-1 py-2 py-sm-0">
                   <Link
                     to="navbar/edit-resume"
@@ -121,27 +141,36 @@ const SideNavbar = () => {
                 style={dark ? { color: "white" } : { color: "black" }}
               >
                 <i className="bi bi-person-circle"></i>{" "}
-                <span className="ms-2 d-none d-sm-inline">Vikram</span>
+                <span className="ms-2 d-none d-sm-inline">
+                  {userDetails.name}
+                </span>
               </Link>
               <div className="dropdown-menu" aria-labelledby="triggerId">
-                <Link className="dropdown-item">
+                <Link to="navbar/profile" className="dropdown-item">
                   {/* <span className="d-sm-inline">1</span>
                 <span className="d-none d-sm-block">Profile</span> */}
-                  Profile
+                  {"Profile (" + userDetails.given_name + ")"}
                 </Link>
-                <Link className="dropdown-item">Settings</Link>
+                {/* <Link className="dropdown-item">Settings</Link> */}
+                <Link to={LOGOUT_URL} className="dropdown-item">
+                  Logout
+                </Link>
               </div>
             </div>
           </div>
           <div className="col-md-2"></div>
           <div className="col" style={{ minHeight: "100vh" }}>
             <Routes>
-              <Route exact path="navbar/" element={<Home />} />
+              {/* <Route exact path="navbar/" element={<Home />} /> */}
               <Route
                 path="navbar/edit-resume"
                 element={<EditResume resume={resume} dark={dark} />}
               />
-              <Route path="navbar/themes" element={<Themes />} />
+              <Route path="navbar/themes" element={<Themes dark={dark} />} />
+              <Route
+                path="navbar/profile"
+                element={<UserProfile profile={userDetails} dark={dark} />}
+              />
             </Routes>
           </div>
         </div>
