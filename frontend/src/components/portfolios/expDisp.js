@@ -8,8 +8,8 @@ function ExpDisp(props) {
   return (
     <>
       <Button
-        variant="link"
-        className="text-white"
+        variant=""
+        className="text-decoration-none"
         onClick={() => setShow(true)}
       >
         {props.work.CompanyName}
@@ -36,6 +36,8 @@ function ExpDisp(props) {
 
           <p className="h5">Responsibilities: </p>
           <p>{props.work.Responsibilities}</p>
+          <p className="h5">Skills: </p>
+          <p>{props.work.Technologies}</p>
         </Modal.Body>
       </Modal>
     </>

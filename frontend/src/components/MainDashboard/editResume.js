@@ -11,7 +11,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import { RESUME_TEMPLATE } from "../../staticComponents/constant";
-// import FormExample from "../A_FormExample";
+import APIService from "../../APIServices/APIService";
 
 function formatDateString(inputDateString) {
   if (inputDateString === "Present") {
@@ -45,6 +45,16 @@ function formatDateForInput(inputDateString) {
   const dateParts = inputDateString.split("-");
   const year = dateParts[0]; // Year
   const month = parseInt(dateParts[1], 10); // Month as a number
+
+  // Get the current date
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth() + 1; // Month is 0-based
+
+  // Check if the provided date is in the current month and year
+  if (year === currentYear && month === currentMonth) {
+    return "Present";
+  }
 
   // Get the month name based on the month number
   const monthNames = [
@@ -138,7 +148,7 @@ function EditResume(props) {
 
   const AchivementSubmit = (e) => {
     e.preventDefault();
-    if (inputCerts.trim() !== "") {
+    if (inputAchivement.trim() !== "") {
       // Add the new sentence to the list of sentences
       setAchivement([...achivement, inputAchivement]);
       // Clear the input field
@@ -157,6 +167,7 @@ function EditResume(props) {
   });
 
   const [workItemIndex, setWorkItemIndex] = useState(0);
+  const [addWork, setAddWork] = useState(0);
   const [work, setWork] = useState(
     Array.isArray(updatedValues.WorkExperience)
       ? [...updatedValues.WorkExperience]
@@ -165,8 +176,8 @@ function EditResume(props) {
 
   const updateWork = () => {
     const updatedWork = [...work];
-    console.log(workItemIndex);
-    if (work) {
+    // console.log(workItemIndex);
+    if (addWork === 1) {
       updatedWork.push(workTemplate);
       setWork(updatedWork);
       setWorkTemplate({
@@ -178,6 +189,7 @@ function EditResume(props) {
         Responsibilities: "",
         Technologies: "",
       });
+      setAddWork(0);
       // console.log(work);
     } else {
       if (workItemIndex >= 0 && workItemIndex < updatedWork.length) {
@@ -264,6 +276,14 @@ function EditResume(props) {
     );
   };
 
+  const callbackendforupdate = (updatedResume) => {
+    APIService.updateResume({ resume_frontend: updatedResume })
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((error) => console.log(error));
+  };
+
   const updateFields = (newValues) => {
     // Create a copy of the constants dictionary
     const updatedConstants = { ...resume };
@@ -275,10 +295,10 @@ function EditResume(props) {
 
     // Set the state with the updated dictionary
     setResume(updatedConstants);
+    callbackendforupdate(updatedConstants);
     // console.log(updatedConstants);
-    // console.log(resume);
   };
-
+  // console.log(resume);
   const handleSubmit = (e) => {
     e.preventDefault();
     const updatedResume = {
@@ -436,9 +456,9 @@ function EditResume(props) {
               {summary
                 ? summary.map((itemSummary, index) => {
                     return (
-                      <Row>
+                      <Row key={index}>
                         <Col>
-                          <span key={index}>
+                          <span>
                             {index + 1 + " - " + itemSummary}
                             <br />
                           </span>
@@ -579,9 +599,9 @@ function EditResume(props) {
               {certs
                 ? certs.map((itemCerts, index) => {
                     return (
-                      <Row>
+                      <Row key={index}>
                         <Col>
-                          <span key={index}>
+                          <span>
                             {index + 1 + " - " + itemCerts}
                             <br />
                           </span>
@@ -691,6 +711,16 @@ function EditResume(props) {
                   className="ms-4 me-2"
                   onClick={() => {
                     setShow(true);
+                    setWorkTemplate({
+                      CompanyName: "",
+                      Position: "",
+                      ProjectName: "",
+                      StartDate: "",
+                      EndDate: "",
+                      Responsibilities: "",
+                      Technologies: "",
+                    });
+                    setAddWork(1);
                   }}
                 >
                   Add Experience <BorderColorIcon />
@@ -715,6 +745,7 @@ function EditResume(props) {
                               setShow(true);
                               setWorkTemplate(workitem);
                               setWorkItemIndex(index);
+                              setAddWork(0);
                             }}
                           >
                             Edit <BorderColorIcon />
@@ -878,7 +909,7 @@ function EditResume(props) {
                       updateWork();
                     }}
                   >
-                    <BorderColorIcon /> Update
+                    <BorderColorIcon /> {addWork ? "Add" : "Update"}
                   </Button>
                 </ModalFooter>
               </Modal>

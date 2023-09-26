@@ -35,6 +35,16 @@ function Projects(props) {
           Education & Work Experience
         </h4>
       </Row>
+      <Row
+        style={{
+          textAlign: "center",
+          marginBottom: "10px",
+        }}
+      >
+        <p>
+          <strong>Note: </strong> Click on the Company name for more details.
+        </p>
+      </Row>
       <div>
         <Timeline position="alternate">
           <TimelineItem>
@@ -44,7 +54,7 @@ function Projects(props) {
               variant="body2"
               color="text.secondary"
             >
-              <Typography className="text-white">Graduation</Typography>
+              <Typography>Graduation</Typography>
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineConnector />

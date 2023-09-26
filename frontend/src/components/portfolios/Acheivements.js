@@ -5,11 +5,11 @@ import { Container, Row } from "react-bootstrap";
 function Acheivements(props) {
   const certifications =
     props.achieve && props.achieve.Certifications
-      ? props.achieve.Certifications.split(". ")
+      ? props.achieve.Certifications
       : [];
   const acheivements =
     props.achieve && props.achieve.Achievements
-      ? props.achieve.Achievements.split(". ")
+      ? props.achieve.Achievements
       : [];
 
   // console.log(certifications);

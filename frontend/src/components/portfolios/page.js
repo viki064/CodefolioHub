@@ -1,33 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import Navbarf from "./navbar";
 import Mainpage from "./mainpage";
 import Footer from "./footer";
-import Chatbot from "../components/chatbotF/chatbot";
-import ChatAPIService from "../APIServices/APIService";
-// import CryptoJS from "crypto-js";
+import Chatbot from "../chatbotF/chatbot";
+import APIService from "../../APIServices/APIService";
 
 function Page() {
-  // const encryptionKey = "CodefolioHub";
+  const { key } = useParams();
   const [resume, setResume] = useState("");
-  const email = "modiyam.vikram@gmail.com";
-  // const hashedEmail = CryptoJS.AES.encrypt(email, encryptionKey).toString();
-  // console.log(hashedEmail);
 
   useEffect(() => {
-    ChatAPIService.loadResume(email)
+    APIService.loadResume(key)
       .then((resp) => {
         setResume(resp);
         // console.log(resp);
       })
       .catch((error) => console.log(error));
-  }, [email]);
+  }, [key]);
 
   return (
     <div>
       <Navbarf />
-      <Mainpage email={email} resume={resume} />
+      <Mainpage email={key} resume={resume} />
       <Footer />
-      <Chatbot email={email} />
+      <Chatbot email={key} />
     </div>
   );
 }

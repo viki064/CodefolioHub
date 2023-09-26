@@ -2,7 +2,7 @@ import "./App.css";
 import { React } from "react";
 import Home from "./components/Home/home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Page from "./portfolios/page";
+import Page from "./components/portfolios/page";
 import SideNavbar from "./components/MainDashboard/SideNavbar";
 
 function App() {
@@ -16,12 +16,12 @@ function App() {
           <Route>
             <Route path="/" exact element={<Home />} />
             <Route path="/dashboard/*" element={<SideNavbar />} />
-            <Route path="*" element={<Home />} />
+            <Route path="/:key" element={<Page />} />
           </Route>
         </Routes>
-        {/* <Page /> */}
-        {/* <SideNavbar /> */}
-        {/* <Home /> */}
+        {/* <Routes>
+          <Route path="/" exact element={<Page />} />
+        </Routes> */}
       </div>
     </BrowserRouter>
   );

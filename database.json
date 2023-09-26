@@ -16,9 +16,66 @@
                 "given_name": "Vikram",
                 "family_name": "Modiyam",
                 "email": "modiyam.vikram@gmail.com",
-                "picture": "https://media.licdn.com/dms/image/D5603AQGwqXbkqNl9wg/profile-displayphoto-shrink_100_100/0/1694464742580?e=1700697600&v=beta&t=jiO-KSvyc-sp1hbRzPC9ky9eEycEGZ9N751jqnpVkQ0"
+                "picture": "https://media.licdn.com/dms/image/D5603AQGwqXbkqNl9wg/profile-displayphoto-shrink_100_100/0/1694464742580?e=1701302400&v=beta&t=wvs9OUD36rKV-C3xgkP6OW1_ViumeSkV7_mwHXKuzwY"
+            },
+            "modiyam.vikram2@gmail.com": {
+                "sub": "zoA5fEDHaS",
+                "email_verified": true,
+                "name": "Vikram Reddy M",
+                "locale": {
+                    "country": "US",
+                    "language": "en"
+                },
+                "given_name": "Vikram Reddy",
+                "family_name": "M",
+                "email": "modiyam.vikram2@gmail.com"
             }
         }
     },
-    "resume_data": {}
+    "resume_data": {
+        "modiyam.vikram2@gmail.com": {
+            "About": "I'm a support engineer.",
+            "Achievements": [
+                "j",
+                "k"
+            ],
+            "Certifications": [
+                "z",
+                "x"
+            ],
+            "Contact": "4709392933",
+            "CountryCode": "+1",
+            "Education": "2019",
+            "Email": "modiyam.vikram2@gmail.com",
+            "FirstName": "Vikram",
+            "LastName": "Modiyam",
+            "MiddleName": "Reddy",
+            "ProfessionalSummary": [
+                "a",
+                "s",
+                "d",
+                "f"
+            ],
+            "TechnicalSkills": [
+                "q",
+                "w",
+                "e",
+                "r",
+                "t",
+                "y"
+            ],
+            "WorkExperience": [
+                {
+                    "CompanyName": "Infer",
+                    "Position": "Sofware",
+                    "ProjectName": "",
+                    "StartDate": "April 0003",
+                    "EndDate": "September 0006",
+                    "Responsibilities": "resp",
+                    "Technologies": "skills"
+                }
+            ],
+            "lastUpdated": "2023-09-26 15:53:09"
+        }
+    }
 }

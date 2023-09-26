@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import image_logo from "../staticComponents/software-engineer.png";
+import image_logo from "../../staticComponents/software-engineer.png";
 import { Col, Container, Row, Card, Button } from "react-bootstrap";
 import Skills from "./skills";
 import Aos from "aos";
 import Projects from "./projects";
 import Acheivements from "./Acheivements";
-import ChatAPIService from "../APIServices/APIService";
+import ChatAPIService from "../../APIServices/APIService";
 
 function Mainpage(props) {
   const [showsumm, setShowsumm] = useState(false);

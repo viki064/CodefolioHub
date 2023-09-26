@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import ChatbotKit from "react-chatbot-kit";
 import "react-chatbot-kit/build/main.css";
 import config from "./chatbotConfig";
@@ -8,25 +8,15 @@ import "./bot.css";
 import { Button } from "react-bootstrap";
 import { BiCommentDots } from "react-icons/bi";
 import ChatbotToast from "./ChatbotToast";
-import ChatAPIService from "../../APIServices/APIService";
+// import ChatAPIService from "../../APIServices/APIService";
 
 function Chatbot(props) {
   const [showChat, setShowChat] = useState(false);
+  const email = props.email;
 
   const handleChatShow = () => {
     setShowChat(!showChat);
   };
-
-  // const [resume, setResume] = useState("");
-
-  useEffect(() => {
-    ChatAPIService.loadResume(props.email)
-      .then((resp) => {
-        // setResume(resp);
-        console.log(resp);
-      })
-      .catch((error) => console.log(error));
-  }, [props.email]);
 
   return (
     <div className="position-fixed bottom-0 end-0 mb-5 me-5">

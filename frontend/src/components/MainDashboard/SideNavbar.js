@@ -3,7 +3,7 @@ import "bootstrap/js/dist/dropdown";
 import "./SideMenu.css";
 import logo from "../../staticComponents/logo.png";
 import { Link, Route, Routes } from "react-router-dom";
-// import Home from "./home";
+import Home from "./home";
 import EditResume from "./editResume";
 import Themes from "./themes";
 import APIService from "../../APIServices/APIService";
@@ -15,7 +15,7 @@ const SideNavbar = () => {
   const [resume, setResume] = useState("");
   const [userDetails, setUserDetails] = useState("");
   const [dark, setDark] = useState(true);
-  const email = "modiyam.vikram@gmail.com";
+  const email = userDetails.email;
 
   const handleChange = () => {
     setDark(!dark);
@@ -39,8 +39,8 @@ const SideNavbar = () => {
       .catch((error) => console.log(error));
     APIService.loadResume(email)
       .then((resp) => {
-        setResume(resp);
-        // console.log(resp);
+        setResume({ ...resp, Email: email });
+        // console.log(resume);
       })
       .catch((error) => console.log(error));
   }, [email]);
@@ -80,7 +80,7 @@ const SideNavbar = () => {
               </Link>
               <hr className="text-secondary d-none d-sm-block" />
               <ul className="nav nav-tabs flex-column mt-3 mt-sm-0">
-                {/* <li className="nav-item fs-4 my-1 py-2 py-sm-0">
+                <li className="nav-item fs-4 my-1 py-2 py-sm-0">
                   <Link
                     to="navbar/"
                     className="nav-link fs-5"
@@ -89,7 +89,7 @@ const SideNavbar = () => {
                     <i className="fs-4 bi bi-house"></i>
                     <span className="ms-2 d-none d-sm-inline">Home</span>
                   </Link>
-                </li> */}
+                </li>
                 <li className="nav-item fs-4 my-1 py-2 py-sm-0">
                   <Link
                     to="navbar/edit-resume"
@@ -161,7 +161,7 @@ const SideNavbar = () => {
           <div className="col-md-2"></div>
           <div className="col" style={{ minHeight: "100vh" }}>
             <Routes>
-              {/* <Route exact path="navbar/" element={<Home />} /> */}
+              <Route exact path="navbar/" element={<Home />} />
               <Route
                 path="navbar/edit-resume"
                 element={<EditResume resume={resume} dark={dark} />}
