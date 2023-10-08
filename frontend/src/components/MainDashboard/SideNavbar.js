@@ -21,20 +21,11 @@ const SideNavbar = () => {
     setDark(!dark);
   };
 
-  //   email: "modiyam.vikram@gmail.com"
-  // email_verified: true
-  // family_name: "Modiyam"
-  // given_name: "Vikram"
-  // locale: {country: 'US', language: 'en'}
-  // name: "Vikram Modiyam"
-  // picture: "https://media.licdn.com/dms/image/D5603AQGwqXbkqNl9wg/profile-displayphoto-shrink_100_100/0/1694464742580?e=1700697600&v=beta&t=jiO-KSvyc-sp1hbRzPC9ky9eEycEGZ9N751jqnpVkQ0"
-  // sub: "rluDvU7muc"
-
   useEffect(() => {
     APIService.loadUser()
       .then((resp) => {
         setUserDetails(resp);
-        // console.log(resp);
+        console.log(resp);
       })
       .catch((error) => console.log(error));
     APIService.loadResume(email)

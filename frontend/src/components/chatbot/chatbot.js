@@ -1,14 +1,8 @@
-import { React, useState } from "react";
-import ChatbotKit from "react-chatbot-kit";
-import "react-chatbot-kit/build/main.css";
-import config from "./chatbotConfig";
-import MessageParser from "./MessageParser";
-import ActionProvider from "./ActionProvider";
-import "./bot.css";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { BiCommentDots } from "react-icons/bi";
 import ChatbotToast from "./ChatbotToast";
-// import ChatAPIService from "../../APIServices/APIService";
+import ChatBotComponent from "./chatbotComponent";
 
 function Chatbot(props) {
   const [showChat, setShowChat] = useState(false);
@@ -43,11 +37,8 @@ function Chatbot(props) {
             zIndex: "9",
           }}
         >
-          <ChatbotKit
-            config={config}
-            messageParser={MessageParser}
-            actionProvider={ActionProvider}
-          />
+          {/* Render the ChatBot component with dynamic steps */}
+          <ChatBotComponent email={email} />
         </div>
       ) : (
         ""

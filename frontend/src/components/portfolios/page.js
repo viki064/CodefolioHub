@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import Navbarf from "./navbar";
 import Mainpage from "./mainpage";
 import Footer from "./footer";
-import Chatbot from "../chatbotF/chatbot";
+import Chatbot from "../chatbot/chatbot";
 import APIService from "../../APIServices/APIService";
 
 function Page() {

@@ -29,6 +29,18 @@
                 "given_name": "Vikram Reddy",
                 "family_name": "M",
                 "email": "modiyam.vikram2@gmail.com"
+            },
+            "sonynikhil1997@gmail.com": {
+                "sub": "o1PydevC8D",
+                "email_verified": true,
+                "name": "Nikhil Manikanta",
+                "locale": {
+                    "country": "US",
+                    "language": "en"
+                },
+                "given_name": "Nikhil",
+                "family_name": "Manikanta",
+                "email": "sonynikhil1997@gmail.com"
             }
         }
     },
@@ -76,6 +88,48 @@
                 }
             ],
             "lastUpdated": "2023-09-26 15:53:09"
+        },
+        "sonynikhil1997@gmail.com": {
+            "About": "I'm a Graduate Engineer in my 2nd year of Post Graduation at the prestigious Indian Institute of Technology Hyderabad, where I'm blending my passion for Mathematics, Coding, Machine Learning and Computer Vision. ",
+            "Achievements": [
+                "Secured an All India Rank of 1562 in the Electrical Engineering paper of the Graduate Aptitude Test in Engineering (GATE), corresponding to a nationwide percentile of 98"
+            ],
+            "Certifications": [
+                "Machine Learning : Linear Algebra, Random Variables and Stochastic Processes, Introduction to AI & ML, Basics & Applications of AI/ML for Process Systems Engineering, Convex Optimization, Deep Learning, Computer Vision",
+                "Control System: Advance Control Theory and Advance Control Lab ",
+                "Embedded : Embedded Programming and Wireless Sensor Networks",
+                "EE : Networks, Signals & Systems, Power Electronics, Electrical Machines, Analog Electronics, Control Systems"
+            ],
+            "Contact": "",
+            "CountryCode": "",
+            "Education": "M.Tech - EE from IIT Hyderabad, India in 2024",
+            "Email": "sonynikhil1997@gmail.com",
+            "FirstName": "Nikhil",
+            "LastName": "Lanka",
+            "MiddleName": "Manikanta",
+            "ProfessionalSummary": [
+                "I'm a Graduate Engineer in my 2nd year of Post Graduation at the prestigious Indian Institute of Technology Hyderabad, where I'm blending my passion for Mathematics, Coding, Machine Learning and Computer Vision. ",
+                "Currently, I'm working on Object Detection using Deep Learning under the guidance of Dr. Ketan P. Detroja, a journey that showcases my diverse skills ranging from mathematical algorithms to Python coding, and from efficient control system implementation to exploring the realms of computer vision. ",
+                "Open to engaging collaborations and fueled by innovation, I'm constantly inspired by the endless possibilities in the field of Machine Learning and eager to contribute to meaningful projects. "
+            ],
+            "TechnicalSkills": [
+                "MATLAB",
+                "Python",
+                "OOPS",
+                "DataStructures",
+                "Algorithms",
+                "Tensorflow",
+                "Keras",
+                "Numpy",
+                "Pandas",
+                "Matplotlib",
+                "LaTeX",
+                "Machine Learning",
+                "Artificial Intelligence",
+                "Computer Vision"
+            ],
+            "WorkExperience": [],
+            "lastUpdated": "2023-09-29 13:30:08"
         }
     }
 }

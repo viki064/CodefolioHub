@@ -12,7 +12,7 @@ function ChatbotToast() {
       <Toast
         onClose={() => setShow(false)}
         show={show}
-        style={{ zIndex: "10", backgroundColor: "black" }}
+        style={{ zIndex: "10", backgroundColor: "black", color: "white" }}
         delay={3000}
         autohide
       >

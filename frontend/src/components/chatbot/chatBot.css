@@ -1,0 +1,109 @@
+/* chatBot.css */
+
+/* Styles for the chat card */
+.chat-card {
+  max-width: 50vh;
+  max-height: 60vh;
+  border: 1px solid black;
+  box-shadow: 0 16px 20px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Styles for the chat card header */
+.chat-header {
+  height: 3rem;
+  border-bottom: 1px solid black;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Styles for the bot typing message */
+.chat-header h6 {
+  margin: 0;
+}
+
+/* Styles for the chat card body (message area) */
+.chat-body {
+  padding-top: 10px;
+  height: 28rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Styles for the message area */
+.msg-area {
+  padding: 5px;
+}
+
+/* Styles for bot messages */
+.msg-align-start {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+/* Styles for bot icons */
+.bot-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+/* Styles for bot messages */
+.bot-msg {
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+/* Styles for user messages */
+.msg-align-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 6px;
+}
+
+/* Styles for user messages */
+.user-msg {
+  background-color: #0077ff;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+/* Styles for user icons */
+.user-icon {
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+/* Styles for the chat card footer */
+.chat-footer {
+  border-top: 1px solid black;
+  border-radius: 0px 0px 30px 30px;
+  background-color: #0077ff;
+  padding: 10px;
+}
+
+/* Styles for the message input */
+.msg-input {
+  flex: 1;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+/* Styles for the submit button */
+.circle-btn {
+  border: none;
+  background-color: #0077ff;
+  border-radius: 50%;
+  padding: 0;
+  margin-left: 10px;
+}
+
+/* Styles for the send icon */
+.send-btn {
+  font-size: 50px;
+  color: #fff;
+  padding: 10px;
+}

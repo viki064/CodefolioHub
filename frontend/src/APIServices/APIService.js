@@ -30,7 +30,7 @@ export default class ChatAPIService {
 
   static async loadUser() {
     try {
-      const resp = await fetch(`http://127.0.0.1:5000/user/login/details`, {
+      const resp = await fetch(`http://localhost:5000/user/login/details`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
