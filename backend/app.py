@@ -108,7 +108,7 @@ def user_details():
     if user_info:
         return jsonify(user_info)
     else:
-        return jsonify({'error': 'User info not found'})
+        return redirect('/linkedin_login')
 
 
 @app.route('/error')
