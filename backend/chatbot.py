@@ -3,6 +3,7 @@ import data_handler as data
 import time
 import os
 import dotenv
+# import docx2txt
 
 # Load environment variables from a .env file
 dotenv.load_dotenv()
@@ -27,8 +28,8 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0)
     return resp.choices[0].message["content"]
 
 
-# resume = read_docx_file("C:/Users/anavi/PycharmProjects/pythonProject/Test Files/Vikram R Modiyam.docx")
-
+# resume = docx2txt.process("D:\\Vikram\\New folder\\OwnProject\\resume\\backend\\Vikram R Modiyam.docx")
+# print(resume)
 resume = ""
 
 
@@ -50,12 +51,12 @@ response = ""
 def complete_context(resume):
     global context
     context = [{'role': 'system', 'content': f"""
-    You are a professional chatbot, \
+    Here is the candidate resume information ```{resume}``` \
+    Think yourself as the candidate from the resume. \
     who can get the answers from the resume mentioned between backticks to the questions given by user. \ 
     provide the response based on the information provided in the backticks, \
     Provide the response only for the given information, \
-    don't add any extra messages to the response. \
-    Here is the candidate resume information ```{resume}```
+    don't add any extra messages to the response.
     """}]
 
 
@@ -85,7 +86,8 @@ def recursive(a, key):
         "Assistant": response
     }
 
+
 #
 # while True:
 #     # print(get_completion_from_messages(context))
-#     print(recursive(a=input("chat here: "), key="modiyam.vikram@gmail.com")["Assistant"])
+#     print(recursive(a=input("chat here: "), key="modiyam.vikram2@gmail.com")["Assistant"])

@@ -46,48 +46,66 @@
     },
     "resume_data": {
         "modiyam.vikram2@gmail.com": {
-            "About": "I'm a support engineer.",
+            "About": "I'm a versatile professional with four years of experience spanning ETL, Unix scripting, incident management, and automation, with expertise in BFSI and healthcare domains, adept in Agile and ITIL methodologies.",
             "Achievements": [
-                "j",
-                "k"
+                "Received multiple On the SPOT Awards from CBA PROJECT MANAGEMENT for fixing the errors which are critical to the client reports.",
+                "Received the Client Appreciations from the Client Managers for working on Automation Scripts to reduce the manual work.",
+                "Developed Python &amp; UNIX Shell scripts to reduce manual effort and deploying as Unix cronjob or scheduling as Abinitio job.",
+                "Developed Python Web Application using flask framework for monitoring the daily file arrivals.",
+                "Built a personal project BSR (Backup Storage Request) Application using the Appian community."
             ],
             "Certifications": [
-                "z",
-                "x"
+                "Certified in Java, Python &amp; Automation Testing from ABC Technologies, Bangalore, India.",
+                "Earned Microsoft Certified Badge for intro to Python.",
+                "PCEP – Certified Entry-Level Python Programmer.",
+                "Certified as Appian (BPM Tool) Associate Developer."
             ],
             "Contact": "4709392933",
             "CountryCode": "+1",
-            "Education": "2019",
+            "Education": "B.E – Electrical and Electronics Engineering from SATHYABAMA UNIVERSITY, INDIA in 2019.",
             "Email": "modiyam.vikram2@gmail.com",
             "FirstName": "Vikram",
             "LastName": "Modiyam",
             "MiddleName": "Reddy",
             "ProfessionalSummary": [
-                "a",
-                "s",
-                "d",
-                "f"
+                "Around 4 years of experience across different areas like Customer Error detecting in Batch scheduler like Abinitio Control Center (ETL Tool), Splunk, developing Unix Scripts to save time and manual efforts, Change Management, Incident Management, SR Ticket Management, Problem Management.",
+                "Exposure to all stages of the Software Development Life Cycle (SDLC).",
+                "Have the working experience on BFSI and HealthCare Domain",
+                "Experience in incident management tools like Service Now and MyService.",
+                "Assisting with the handling of major Incidents and identifying the root causes.",
+                "Preventing the replication of Problems across multiple systems.",
+                "Taking part in a Daily status call to update the Clients and team about the progress of ongoing and future releases.",
+                "Knowledge on executing Scripts and maintaining the database based on SOP (Standard Operating Procedure).",
+                "Experience providing support services including Incident Management, Problem Management, Change Management, Vulnerability Management, Monitoring & Alerting.",
+                "Developing Python & UNIX Shell scripts to reduce manual effort.",
+                "Automating the manual activities to reduce human intervention using Unix Scripting.",
+                "Deployed Scripts into a crontab/Abinitio Jobs for scheduling.",
+                "Knowledge on migrating Unix servers to AWS Cloud servers.",
+                "Ticket Management of Incidents, Change requests, Service requests and Jira Backlog handling by working with the Engineering team.",
+                "Transferring Server files to AWS S3 Cloud Storage.",
+                "Maintaining the application related websites from web servers.",
+                "Managing the Deployments through Unix scripts.",
+                "Good communications skills to work with multiple teams.",
+                "Having working experience on methodology like Agile and ITIL Framework.",
+                "Actively taking the manual tasks and automating it using shell scripting, which are available in the manual tasks confluence page for a long time.",
+                "Actively involved in assisting Teams technical and Functional knowledge improving training activities.",
+                "Work Handled on 24/7 Support, supporting mutiple applications."
             ],
-            "TechnicalSkills": [
-                "q",
-                "w",
-                "e",
-                "r",
-                "t",
-                "y"
-            ],
+            "TechnicalSkills": ["Abinitio(ETL) - Control Center", "eclipse", "Notepad ++", "Jupyter", "GIT", "Tomcat",
+"Oracle SQL Developer", "MS SQL Server Management Studio", "MobaXterm",
+"Putty", "Appian BPM 22.X", "Confluence", "Splunk", "Jira", "MyService", "Service Now", "JSON", "HTML", "CSS", "ReactJS", "Core Java", "Python", "SQL", "Unix Scripting", "MS SQL", "Oracle", "AWS RDS", "AWS S3", "MS Windows", "Unix/Linux"],
             "WorkExperience": [
                 {
                     "CompanyName": "Infer",
+                    "EndDate": "September 0006",
                     "Position": "Sofware",
                     "ProjectName": "",
-                    "StartDate": "April 0003",
-                    "EndDate": "September 0006",
                     "Responsibilities": "resp",
+                    "StartDate": "April 0003",
                     "Technologies": "skills"
                 }
             ],
-            "lastUpdated": "2023-09-26 15:53:09"
+            "lastUpdated": "2023-10-23 08:36:43"
         },
         "sonynikhil1997@gmail.com": {
             "About": "I'm a Graduate Engineer in my 2nd year of Post Graduation at the prestigious Indian Institute of Technology Hyderabad, where I'm blending my passion for Mathematics, Coding, Machine Learning and Computer Vision. ",
