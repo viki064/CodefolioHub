@@ -693,7 +693,7 @@ function EditResume(props) {
                   type="text"
                   value={inputAchivement}
                   onChange={(e) => setInputAchivement(e.target.value)}
-                  placeholder="Click on Add button to add the Acheivements."
+                  placeholder="Click on Add button to add the Achievements."
                 />
               </Col>
               <Col style={{ maxWidth: "10vh" }}>

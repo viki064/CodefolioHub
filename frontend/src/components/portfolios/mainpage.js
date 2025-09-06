@@ -4,7 +4,7 @@ import { Col, Container, Row, Card, Button } from "react-bootstrap";
 import Skills from "./skills";
 import Aos from "aos";
 import Projects from "./projects";
-import Acheivements from "./Acheivements";
+import Achievements from "./Achievements";
 import ChatAPIService from "../../APIServices/APIService";
 
 function Mainpage(props) {
@@ -94,8 +94,8 @@ function Mainpage(props) {
       <div id="projects" data-aos="fade">
         <Projects work={props.resume} />
       </div>
-      <div id="acheivements" data-aos="fade">
-        <Acheivements achieve={props.resume} />
+      <div id="achievements" data-aos="fade">
+        <Achievements achieve={props.resume} />
       </div>
     </>
   );
