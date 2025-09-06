@@ -107,7 +107,10 @@ def add_users(body):
 def read_users(key=None):
     if len(user_data) != 0:
         if key is not None:
-            return user_data[key]
+            if key in user_data:
+                return user_data[key]
+            else:
+                return {"error": "User not found"}
         else:
             data_json.error["error"] = "Data is not available for the given key."
             return data_json.error
