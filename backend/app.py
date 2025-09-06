@@ -142,8 +142,10 @@ def delete_articles(key):
     return jsonify(data_handler.delete_record_from_json(key))
 
 
-@app.route('/chat/<key>/', methods=['GET', 'POST'])
+@app.route('/chat/<key>/', methods=['POST'])
 def chat_by_id(key):
+    if not request.is_json or 'user' not in request.json:
+        return jsonify({"error": "Missing user in request body"}), 400
     body = request.json['user']
     return jsonify(chatbot.recursive(a=body, key=key))
 
