@@ -3,6 +3,7 @@ import App from './App';
 
 test('renders CodefolioHub header', () => {
   render(<App />);
-  const headerElements = screen.getAllByText(/CodefolioHub/i);
-  expect(headerElements[0]).toBeInTheDocument();
+  const headerElement = screen.getByRole('heading', { name: /CodefolioHub/i });
+  expect(headerElement).toBeInTheDocument();
+  expect(screen.getAllByRole('heading', { name: /CodefolioHub/i })).toHaveLength(1);
 });
