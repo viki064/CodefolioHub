@@ -80,7 +80,7 @@ def delete_record_from_json(key=None):
         return data_json.error
 
 
-# the below method is used to update the new record in the flask_details data
+# the below method is used to update an existing record in the flask_details data
 def update_new_record_to_json(body, key=None):
     if key is not None and is_key_valid(key):
         body["lastUpdated"] = date
@@ -88,14 +88,14 @@ def update_new_record_to_json(body, key=None):
         write_json(json_data=json_data)
         return {
             "new updated record": body,
-            "message": "Record added successfully."
+            "message": "Record updated successfully."
         }
     else:
         data_json.error["error"] = "ID is not available to update the record"
         return data_json.error
 
 
-# add used into json file
+# add user into json file
 def add_users(body):
     # body = json.loads(body)
     user_data["Users"][body["email"]] = body
