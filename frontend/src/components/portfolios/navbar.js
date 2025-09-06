@@ -22,7 +22,7 @@ function Navbarf() {
               <Nav.Link href="#home">About</Nav.Link>
               <Nav.Link href="#skills">Skills</Nav.Link>
               <Nav.Link href="#projects">Projects</Nav.Link>
-              <Nav.Link href="#acheivements">Acheivements</Nav.Link>
+              <Nav.Link href="#achievements">Achievements</Nav.Link>
             </Nav>
           </Navbar.Collapse>
           <Contact />

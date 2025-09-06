@@ -2,12 +2,12 @@ import React from "react";
 import { Container, Row } from "react-bootstrap";
 // import FlipCard from "./flipcard";
 
-function Acheivements(props) {
+function Achievements(props) {
   const certifications =
     props.achieve && props.achieve.Certifications
       ? props.achieve.Certifications
       : [];
-  const acheivements =
+  const achievements =
     props.achieve && props.achieve.Achievements
       ? props.achieve.Achievements
       : [];
@@ -22,7 +22,7 @@ function Acheivements(props) {
         }}
       >
         <h4 className="text-decoration-underline">
-          Certifications & Acheivements
+          Certifications & Achievements
         </h4>
       </Row>
       <>
@@ -30,8 +30,8 @@ function Acheivements(props) {
         {certifications.map((item) => {
           return <p>{item}</p>;
         })}
-        <h4 className="text-decoration-underline">Acheivements: </h4>
-        {acheivements.map((item) => {
+        <h4 className="text-decoration-underline">Achievements: </h4>
+        {achievements.map((item) => {
           return <p>{item}</p>;
         })}
       </>
@@ -39,4 +39,4 @@ function Acheivements(props) {
   );
 }
 
-export default Acheivements;
+export default Achievements;
