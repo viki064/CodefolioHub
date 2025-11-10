@@ -19,7 +19,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 # The frontend origin allowed for CORS and redirects
-frontend_url = os.getenv("FRONTEND_URL")
+frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
 CORS(app, origins=[frontend_url])
 
 # Configure SSL settings (for development)
