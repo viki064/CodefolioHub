@@ -13,3 +13,48 @@
 .lightmode {
   color: black;
 }
+
+/* Mobile responsive improvements */
+@media (max-width: 768px) {
+  /* Make sidebar full width on mobile when expanded */
+  .col-auto.col-md-2 {
+    width: 100% !important;
+    max-width: 100% !important;
+    position: fixed !important;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+  }
+
+  /* Hide sidebar text on mobile by default */
+  .d-none.d-sm-inline {
+    display: inline !important;
+  }
+
+  /* Improve touch targets for mobile */
+  .nav-item {
+    min-height: 48px;
+  }
+
+  .nav-link {
+    padding: 12px 8px !important;
+    font-size: 16px !important;
+  }
+
+  /* Make dropdown more touch-friendly */
+  .dropdown-menu {
+    min-width: 200px;
+  }
+
+  .dropdown-item {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .nav-link {
+    padding: 10px 6px;
+  }
+}

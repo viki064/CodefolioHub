@@ -75,13 +75,17 @@ function Mainpage(props) {
               </Card>
             </Col>
             <Col>
-              <Card className="ms-5 mb-3 ps-4 border-0">
+              <Card className="ms-md-5 mb-3 ps-md-4 border-0">
                 <Card.Img
                   style={{
-                    height: "20rem",
-                    width: "22rem",
+                    maxHeight: "20rem",
+                    maxWidth: "100%",
+                    width: "auto",
+                    height: "auto",
+                    objectFit: "contain",
                   }}
                   src={image_logo}
+                  alt="Portfolio illustration"
                 />
               </Card>
             </Col>

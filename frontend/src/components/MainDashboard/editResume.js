@@ -7,6 +7,7 @@ import {
   Button,
   Modal,
   ModalFooter,
+  Alert,
 } from "react-bootstrap";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -81,6 +82,10 @@ function EditResume(props) {
     props.resume ? { ...props.resume } : RESUME_TEMPLATE
   );
   const [show, setShow] = useState(false);
+  const [validated, setValidated] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const [updatedValues, setUpdatedValues] = useState(
     resume ? { ...resume } : RESUME_TEMPLATE
@@ -299,8 +304,47 @@ function EditResume(props) {
     // console.log(updatedConstants);
   };
   // console.log(resume);
+
+  // Validation function
+  const validateForm = (values) => {
+    const errors = {};
+
+    // Name validation
+    if (!values.FirstName || values.FirstName.trim() === "") {
+      errors.FirstName = "First name is required";
+    }
+    if (!values.LastName || values.LastName.trim() === "") {
+      errors.LastName = "Last name is required";
+    }
+
+    // Email validation
+    if (!values.Email || values.Email.trim() === "") {
+      errors.Email = "Email is required";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.Email)) {
+      errors.Email = "Invalid email address";
+    }
+
+    // Contact validation
+    if (!values.Contact || values.Contact.trim() === "") {
+      errors.Contact = "Contact number is required";
+    } else if (!/^\d{10,15}$/.test(values.Contact.replace(/[\s-()]/g, ''))) {
+      errors.Contact = "Invalid contact number (10-15 digits required)";
+    }
+
+    // About section validation
+    if (!values.About || values.About.trim() === "") {
+      errors.About = "About section is required";
+    } else if (values.About.length < 50) {
+      errors.About = "About section should be at least 50 characters";
+    }
+
+    return errors;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    setValidated(true);
+
     const updatedResume = {
       ...updatedValues,
       ProfessionalSummary: summary,
@@ -310,7 +354,30 @@ function EditResume(props) {
       WorkExperience: work,
     };
 
+    // Validate form
+    const errors = validateForm(updatedResume);
+    setValidationErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      // Show error alert
+      setAlertMessage("Please fix the validation errors before saving");
+      setShowAlert(true);
+
+      // Scroll to top to show alert
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Hide alert after 5 seconds
+      setTimeout(() => setShowAlert(false), 5000);
+      return;
+    }
+
     updateFields(updatedResume);
+
+    // Show success message
+    setAlertMessage("Resume updated successfully!");
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 3000);
+
     // console.log(updatedResume);
     // console.log(resume);
   };
@@ -327,6 +394,23 @@ function EditResume(props) {
         YOUR RESUME
       </h2>
       <Container className="mt-4 mb-5 p-4 border shadow-md rounded">
+        {showAlert && (
+          <Alert
+            variant={Object.keys(validationErrors).length > 0 ? "danger" : "success"}
+            dismissible
+            onClose={() => setShowAlert(false)}
+          >
+            {alertMessage}
+            {Object.keys(validationErrors).length > 0 && (
+              <ul className="mt-2 mb-0">
+                {Object.entries(validationErrors).map(([field, error]) => (
+                  <li key={field}>{error}</li>
+                ))}
+              </ul>
+            )}
+          </Alert>
+        )}
+
         <Row
           style={{
             textAlign: "center",
@@ -338,10 +422,10 @@ function EditResume(props) {
 
         <Row>
           {/* <FormExample /> */}
-          <Form onSubmit={handleSubmit}>
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group as={Row} className="mt-4">
               <Col>
-                <Form.Label>First Name</Form.Label>
+                <Form.Label>First Name <span className="text-danger">*</span></Form.Label>
                 <Form.Control
                   type="text"
                   value={updatedValues.FirstName}
@@ -353,7 +437,12 @@ function EditResume(props) {
                   }
                   placeholder="First Name"
                   style={{ maxWidth: "60vh" }}
+                  isInvalid={validated && validationErrors.FirstName}
+                  required
                 />
+                <Form.Control.Feedback type="invalid">
+                  {validationErrors.FirstName}
+                </Form.Control.Feedback>
               </Col>
               <Col>
                 <Form.Label>Middle Name</Form.Label>
@@ -371,7 +460,7 @@ function EditResume(props) {
                 />
               </Col>
               <Col>
-                <Form.Label>Last Name</Form.Label>
+                <Form.Label>Last Name <span className="text-danger">*</span></Form.Label>
                 <Form.Control
                   type="text"
                   value={updatedValues.LastName}
@@ -383,14 +472,20 @@ function EditResume(props) {
                   }
                   placeholder="Last Name"
                   style={{ maxWidth: "60vh" }}
+                  isInvalid={validated && validationErrors.LastName}
+                  required
                 />
+                <Form.Control.Feedback type="invalid">
+                  {validationErrors.LastName}
+                </Form.Control.Feedback>
               </Col>
             </Form.Group>
             <Form.Group as={Row} className="mt-4">
               <Col>
-                <Form.Label>Short Description</Form.Label>
+                <Form.Label>Short Description <span className="text-danger">*</span></Form.Label>
                 <Form.Control
-                  type="text"
+                  as="textarea"
+                  rows={3}
                   value={updatedValues.About}
                   onChange={(e) =>
                     setUpdatedValues({
@@ -398,13 +493,21 @@ function EditResume(props) {
                       About: e.target.value,
                     })
                   }
-                  placeholder="Short Description"
+                  placeholder="Short Description (minimum 50 characters)"
+                  isInvalid={validated && validationErrors.About}
+                  required
                 />
+                <Form.Control.Feedback type="invalid">
+                  {validationErrors.About}
+                </Form.Control.Feedback>
+                <Form.Text className="text-muted">
+                  {updatedValues.About?.length || 0} / 50 minimum characters
+                </Form.Text>
               </Col>
             </Form.Group>
             <Form.Group as={Row} className="mt-3">
               <Col>
-                <Form.Label>Email</Form.Label>
+                <Form.Label>Email <span className="text-danger">*</span></Form.Label>
                 <Form.Control
                   type="email"
                   value={updatedValues.Email}
@@ -416,7 +519,12 @@ function EditResume(props) {
                   }
                   placeholder="name@example.com"
                   style={{ maxWidth: "60vh" }}
+                  isInvalid={validated && validationErrors.Email}
+                  required
                 />
+                <Form.Control.Feedback type="invalid">
+                  {validationErrors.Email}
+                </Form.Control.Feedback>
               </Col>
               <Col>
                 <Form.Label>Country Code</Form.Label>
@@ -434,7 +542,7 @@ function EditResume(props) {
                 />
               </Col>
               <Col>
-                <Form.Label>Contact Number</Form.Label>
+                <Form.Label>Contact Number <span className="text-danger">*</span></Form.Label>
                 <Form.Control
                   type="text"
                   value={updatedValues.Contact}
@@ -444,9 +552,14 @@ function EditResume(props) {
                       Contact: e.target.value,
                     })
                   }
-                  placeholder="Contact Number"
+                  placeholder="Contact Number (10-15 digits)"
                   style={{ maxWidth: "60vh" }}
+                  isInvalid={validated && validationErrors.Contact}
+                  required
                 />
+                <Form.Control.Feedback type="invalid">
+                  {validationErrors.Contact}
+                </Form.Control.Feedback>
               </Col>
             </Form.Group>
             <Row>

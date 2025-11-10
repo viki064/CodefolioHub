@@ -5,6 +5,7 @@ import Mainpage from "./mainpage";
 import Footer from "./footer";
 import Chatbot from "../chatbot/chatbot";
 import APIService from "../../APIServices/APIService";
+import "./portfolio-responsive.css";
 
 function Page() {
   const { key } = useParams();

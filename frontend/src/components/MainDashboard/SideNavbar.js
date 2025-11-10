@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/js/dist/dropdown";
 import "./SideMenu.css";
+import "./dashboard-responsive.css";
 import logo from "../../staticComponents/logo.png";
 import { Link, Route, Routes } from "react-router-dom";
 import Home from "./home";

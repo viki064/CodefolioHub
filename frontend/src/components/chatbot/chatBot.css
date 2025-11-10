@@ -2,10 +2,13 @@
 
 /* Styles for the chat card */
 .chat-card {
-  max-width: 50vh;
-  max-height: 60vh;
+  width: 380px;
+  max-width: calc(100vw - 20px);
+  height: 500px;
+  max-height: calc(100vh - 120px);
   border: 1px solid black;
   box-shadow: 0 16px 20px 0 rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
 }
 
 /* Styles for the chat card header */
@@ -14,6 +17,7 @@
   border-bottom: 1px solid black;
   text-align: center;
   padding: 10px;
+  border-radius: 15px 15px 0 0;
 }
 
 /* Styles for the bot typing message */
@@ -24,9 +28,23 @@
 /* Styles for the chat card body (message area) */
 .chat-body {
   padding-top: 10px;
-  height: 28rem;
+  height: calc(100% - 9rem);
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .chat-card {
+    width: calc(100vw - 20px);
+    height: calc(100vh - 100px);
+    max-height: 600px;
+    border-radius: 15px 15px 0 0;
+  }
+
+  .chat-body {
+    height: calc(100% - 7rem);
+  }
 }
 
 /* Styles for the message area */

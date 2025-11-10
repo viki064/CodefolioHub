@@ -1,0 +1,233 @@
+/* Portfolio Mobile Responsive Styles */
+
+/* General mobile improvements */
+@media (max-width: 768px) {
+  /* Container padding adjustments */
+  .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+
+  /* Card spacing improvements */
+  .card {
+    margin-bottom: 1rem;
+  }
+
+  /* Image responsiveness */
+  .card-img {
+    max-width: 100% !important;
+    height: auto !important;
+    width: 100% !important;
+  }
+
+  /* Remove excessive margins on mobile */
+  .ms-5, .me-5 {
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
+  }
+
+  .mt-5 {
+    margin-top: 1.5rem !important;
+  }
+
+  .mb-5 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Make buttons full width on mobile for better touch */
+  .btn {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  /* Portfolio hero section */
+  #home .container {
+    padding: 1rem !important;
+  }
+
+  #home .card {
+    margin-top: 1rem !important;
+    padding: 1rem !important;
+  }
+
+  #home .h4 {
+    font-size: 1.25rem !important;
+  }
+
+  /* Skills section mobile */
+  #skills .container {
+    padding: 1rem !important;
+  }
+
+  /* Projects section mobile */
+  #projects .container {
+    padding: 1rem !important;
+  }
+
+  /* Make timeline items stack better */
+  .MuiTimeline-root {
+    padding: 0 !important;
+  }
+
+  .MuiTimelineItem-root {
+    min-height: auto !important;
+  }
+
+  /* Achievements section mobile */
+  #achievements .container {
+    padding: 1rem !important;
+  }
+
+  /* Contact button mobile */
+  button[style*="marginRight"] {
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
+  }
+
+  /* Navbar improvements */
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-brand h3 {
+    font-size: 1.25rem !important;
+  }
+
+  /* Make nav links more touch-friendly */
+  .nav-link {
+    padding: 0.75rem 1rem !important;
+    font-size: 16px;
+  }
+
+  /* Modal improvements */
+  .modal-dialog {
+    margin: 0.5rem !important;
+  }
+
+  .modal-body {
+    padding: 1rem !important;
+  }
+
+  /* Form controls */
+  .form-control {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    min-height: 44px;
+  }
+
+  textarea.form-control {
+    min-height: 100px !important;
+  }
+}
+
+/* Small mobile devices (portrait) */
+@media (max-width: 480px) {
+  /* Even more compact on small screens */
+  .container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  h1, .h1 {
+    font-size: 1.75rem !important;
+  }
+
+  h2, .h2 {
+    font-size: 1.5rem !important;
+  }
+
+  h3, .h3 {
+    font-size: 1.25rem !important;
+  }
+
+  h4, .h4 {
+    font-size: 1.1rem !important;
+  }
+
+  /* Stack everything vertically */
+  .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .col {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+
+  /* Buttons take more space */
+  .btn {
+    padding: 0.75rem 1rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Contact button specific */
+  button[style*="borderRadius"] {
+    margin-right: 0.5rem !important;
+    margin-left: 0.5rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .card {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Adjust image sizes for tablets */
+  .card-img {
+    max-width: 90%;
+    height: auto;
+  }
+}
+
+/* Landscape mobile improvements */
+@media (max-width: 896px) and (orientation: landscape) {
+  /* Reduce vertical spacing in landscape */
+  .mt-5 {
+    margin-top: 1rem !important;
+  }
+
+  .mb-5 {
+    margin-bottom: 1rem !important;
+  }
+
+  .p-5 {
+    padding: 1.5rem !important;
+  }
+
+  #home .card {
+    margin-top: 0.5rem !important;
+    padding: 1rem !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  /* Hide interactive elements when printing */
+  button,
+  .navbar,
+  .chatbot-container {
+    display: none !important;
+  }
+
+  /* Optimize for print */
+  body {
+    font-size: 12pt;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .card {
+    page-break-inside: avoid;
+  }
+}

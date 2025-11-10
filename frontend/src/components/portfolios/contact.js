@@ -91,9 +91,11 @@ function Contact(props) {
       <Button
         style={{
           zIndex: "9",
-          marginRight: "6vh",
-          marginLeft: "6vh",
+          marginRight: "clamp(0.5rem, 3vw, 6vh)",
+          marginLeft: "clamp(0.5rem, 3vw, 6vh)",
           borderRadius: "20px",
+          minHeight: "44px",
+          padding: "0.5rem 1.5rem",
         }}
         variant="primary"
         onClick={() => setShow(true)}
