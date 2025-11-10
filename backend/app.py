@@ -54,7 +54,7 @@ def get_linkedin_oauth_token():
 # Helper functions
 
 def is_authenticated():
-    return 'linkedin_token' in session
+    return 'linkedin_token' in session or 'dev_user' in session
 
 
 def login_required(func):
@@ -81,9 +81,41 @@ def login():
 def logout():
     global user_info
     session.pop('linkedin_token', None)
+    session.pop('dev_user', None)
     user_info = dict()
     session.clear()
     return redirect(frontend_url)
+
+
+@app.route('/dev-login')
+def dev_login():
+    """Development-only login bypass - creates a mock user session"""
+    global user_info
+
+    # Create a mock user (similar to LinkedIn OAuth response)
+    mock_user = {
+        "sub": "dev_user_123",
+        "email_verified": True,
+        "name": "Dev User",
+        "locale": {
+            "country": "US",
+            "language": "en"
+        },
+        "given_name": "Dev",
+        "family_name": "User",
+        "email": "dev@codefoliohub.com",
+        "picture": "https://via.placeholder.com/100"
+    }
+
+    # Set session
+    session['dev_user'] = True
+    user_info = mock_user
+
+    # Add user to database
+    data_handler.add_users(mock_user)
+
+    # Redirect to dashboard
+    return redirect(frontend_url + '/dashboard/navbar/')
 
 
 @app.route('/linkedin/login/authorized')
