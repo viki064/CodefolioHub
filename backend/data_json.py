@@ -92,6 +92,9 @@ resume_format = {
     "Certifications": "",
     "Achievements": "",
     "WorkExperience": [],
+    "customSlug": "",
+    "selectedTheme": "classic",
+    "enableChatbot": True,
     "lastUpdated": ""
 }
 #

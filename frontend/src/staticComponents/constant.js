@@ -18,6 +18,9 @@ export const RESUME_TEMPLATE = {
   Certifications: [],
   Achievements: [],
   WorkExperience: [],
+  customSlug: "",
+  selectedTheme: "classic",
+  enableChatbot: true,
   lastUpdated: "",
 };
 

@@ -2,7 +2,7 @@ import { Container, Navbar, Nav } from "react-bootstrap";
 import "./navBar.css";
 import Contact from "./contact";
 
-function Navbarf() {
+function Navbarf(props) {
   return (
     <>
       <Navbar
@@ -25,7 +25,7 @@ function Navbarf() {
               <Nav.Link href="#achievements">Achievements</Nav.Link>
             </Nav>
           </Navbar.Collapse>
-          <Contact />
+          <Contact portfolioOwnerEmail={props.portfolioOwnerEmail} />
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         </Container>
       </Navbar>

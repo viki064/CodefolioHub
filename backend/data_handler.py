@@ -120,6 +120,107 @@ def read_users(key=None):
         }
 
 
+# Slug management functions
+def is_slug_available(slug):
+    """Check if a custom slug is available (not in use)"""
+    # Check if slug is used as an email key
+    if slug in data.keys():
+        return False
+
+    # Check if slug is used as a customSlug in any resume
+    for key, resume_data in data.items():
+        if resume_data and isinstance(resume_data, dict):
+            if resume_data.get('customSlug') == slug:
+                return False
+
+    return True
+
+
+def update_custom_slug(email, slug):
+    """Update or set a custom slug for a user's resume"""
+    if not is_key_valid(email):
+        return {
+            "success": False,
+            "message": "User resume not found. Please create your resume first."
+        }
+
+    # Check if slug is available (unless it's the user's current slug)
+    current_slug = data[email].get('customSlug')
+    if slug != current_slug and not is_slug_available(slug):
+        return {
+            "success": False,
+            "message": "This slug is already taken by another user."
+        }
+
+    # Update the slug
+    data[email]['customSlug'] = slug
+    data[email]['lastUpdated'] = date
+    write_json(json_data=json_data)
+
+    return {
+        "success": True,
+        "message": "Custom slug updated successfully.",
+        "slug": slug
+    }
+
+
+def get_resume_by_slug(slug):
+    """Get resume data by custom slug"""
+    for key, resume_data in data.items():
+        if resume_data and isinstance(resume_data, dict):
+            if resume_data.get('customSlug') == slug:
+                return resume_data
+    return None
+
+
+def update_theme_settings(email, theme, enable_chatbot):
+    """Update user's theme and chatbot settings"""
+    if not is_key_valid(email):
+        return {
+            "success": False,
+            "message": "User resume not found. Please create your resume first."
+        }
+
+    # Update the theme and chatbot settings
+    data[email]['selectedTheme'] = theme
+    data[email]['enableChatbot'] = enable_chatbot
+    data[email]['lastUpdated'] = date
+    write_json(json_data=json_data)
+
+    return {
+        "success": True,
+        "message": "Theme settings updated successfully.",
+        "theme": theme,
+        "enableChatbot": enable_chatbot
+    }
+
+
+def save_contact_message(portfolio_owner_email, message_data):
+    """Save a contact message for a portfolio owner"""
+    # Initialize contact_messages section if it doesn't exist
+    if "contact_messages" not in json_data:
+        json_data["contact_messages"] = {}
+
+    # Initialize array for this user if it doesn't exist
+    if portfolio_owner_email not in json_data["contact_messages"]:
+        json_data["contact_messages"][portfolio_owner_email] = []
+
+    # Add timestamp to message
+    message_data['timestamp'] = date
+    message_data['read'] = False
+
+    # Append the message
+    json_data["contact_messages"][portfolio_owner_email].append(message_data)
+
+    # Write to file
+    write_json(json_data=json_data)
+
+    return {
+        "success": True,
+        "message": "Your message has been sent successfully!"
+    }
+
+
 sample_data = {
     "FirstName": "Vikram",
     "MiddleName": "Reddy",

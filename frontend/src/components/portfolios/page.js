@@ -9,11 +9,14 @@ import APIService from "../../APIServices/APIService";
 function Page() {
   const { key } = useParams();
   const [resume, setResume] = useState("");
+  const [showChatbot, setShowChatbot] = useState(true);
 
   useEffect(() => {
     APIService.loadResume(key)
       .then((resp) => {
         setResume(resp);
+        // Check if chatbot is enabled (default to true if not set)
+        setShowChatbot(resp.enableChatbot !== undefined ? resp.enableChatbot : true);
         // console.log(resp);
       })
       .catch((error) => console.log(error));
@@ -21,10 +24,10 @@ function Page() {
 
   return (
     <div>
-      <Navbarf />
+      <Navbarf portfolioOwnerEmail={key} />
       <Mainpage email={key} resume={resume} />
       <Footer />
-      <Chatbot email={key} />
+      {showChatbot && <Chatbot email={key} />}
     </div>
   );
 }

@@ -118,10 +118,17 @@ def error_details():
 
 @app.route('/get/<key>/', methods=['GET'])
 def get_articles_by_id(key):
+    # First try to get by email key
     if data_handler.is_key_valid(key):
         return jsonify(data_handler.read_json_with_id(key))
-    else:
-        return jsonify(data_json.resume_format)
+
+    # If not found, try to get by custom slug
+    resume_by_slug = data_handler.get_resume_by_slug(key)
+    if resume_by_slug:
+        return jsonify(resume_by_slug)
+
+    # If still not found, return empty template
+    return jsonify(data_json.resume_format)
 
 
 @app.route('/add', methods=['POST'])
@@ -148,6 +155,94 @@ def chat_by_id(key):
         return jsonify({"error": "Missing user in request body"}), 400
     body = request.json['user']
     return jsonify(chatbot.recursive(a=body, key=key))
+
+
+@app.route('/check-slug/<slug>', methods=['GET'])
+def check_slug_availability(slug):
+    """Check if a custom slug is available"""
+    # Check if slug exists in resume data (as a key or as a customSlug field)
+    is_available = data_handler.is_slug_available(slug)
+    return jsonify({"available": is_available, "slug": slug})
+
+
+@app.route('/update-slug', methods=['POST'])
+def update_slug():
+    """Update user's custom slug"""
+    if not request.is_json:
+        return jsonify({"success": False, "message": "Invalid request"}), 400
+
+    email = request.json.get('email')
+    slug = request.json.get('slug')
+
+    if not email or not slug:
+        return jsonify({"success": False, "message": "Email and slug are required"}), 400
+
+    # Validate slug format
+    import re
+    if not re.match(r'^[a-z0-9-]+$', slug):
+        return jsonify({"success": False, "message": "Invalid slug format"}), 400
+
+    # Update the slug
+    result = data_handler.update_custom_slug(email, slug)
+
+    if result.get("success"):
+        return jsonify(result)
+    else:
+        return jsonify(result), 400
+
+
+@app.route('/update-theme', methods=['POST'])
+def update_theme():
+    """Update user's portfolio theme and chatbot settings"""
+    if not request.is_json:
+        return jsonify({"success": False, "message": "Invalid request"}), 400
+
+    email = request.json.get('email')
+    theme = request.json.get('theme')
+    enable_chatbot = request.json.get('enableChatbot', True)
+
+    if not email or not theme:
+        return jsonify({"success": False, "message": "Email and theme are required"}), 400
+
+    # Update the theme
+    result = data_handler.update_theme_settings(email, theme, enable_chatbot)
+
+    if result.get("success"):
+        return jsonify(result)
+    else:
+        return jsonify(result), 400
+
+
+@app.route('/contact/<portfolio_owner_email>', methods=['POST'])
+def handle_contact(portfolio_owner_email):
+    """Handle contact form submissions for portfolio owners"""
+    if not request.is_json:
+        return jsonify({"success": False, "message": "Invalid request"}), 400
+
+    name = request.json.get('name')
+    email = request.json.get('email')
+    message = request.json.get('message')
+
+    if not name or not email or not message:
+        return jsonify({"success": False, "message": "All fields are required"}), 400
+
+    # Validate email format
+    import re
+    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    if not re.match(email_pattern, email):
+        return jsonify({"success": False, "message": "Invalid email format"}), 400
+
+    # Store the contact message
+    result = data_handler.save_contact_message(portfolio_owner_email, {
+        "name": name,
+        "email": email,
+        "message": message
+    })
+
+    if result.get("success"):
+        return jsonify(result)
+    else:
+        return jsonify(result), 400
 
 
 if __name__ == "__main__":
