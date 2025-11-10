@@ -54,13 +54,9 @@ resume = {
                 "password": "admin"
             }
         ],
-        "Users": [
-
-        ]
+        "Users": {}
     },
-    "resume_data": {
-
-    }
+    "resume_data": {}
 }
 
 error = {
